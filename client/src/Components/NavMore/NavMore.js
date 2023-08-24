@@ -1,9 +1,8 @@
 import { React, useState } from "react";
 import { NavLink } from "react-router-dom";
 import CloseMoreNav from "./../CloseMoreNav/CloseMoreNav";
-import MainContainer from "./../../mainBlocks/MainContainer/MainContainer";
-import pic2 from "./../../imgs/pic2.jpeg";
-import DisplayBlock from "../DisplayBlock/DisplayBlock";
+import Container from "./../Container/Container";
+import defaultImg from "./../../imgs/default.jpeg";
 import { TiFolder } from "react-icons/ti";
 import { GiElectric } from "react-icons/gi";
 import { FaBattleNet } from "react-icons/fa";
@@ -19,10 +18,10 @@ export const NavMore = (props) => {
   return (
     <Form>
       <CloseMoreNav bgColor={`transparent`} clicked={props.showModal} />
-      <MainContainer>
+      <Container>
         <Div onClick={props.showModal}>
           <DivImg>
-            <Img src={pic2} alt="UserImg" />
+            <Img src={defaultImg} alt="UserImg" />
             <P primary>Mariam</P>
             <P>@Maro_Muhammed</P>
           </DivImg>
@@ -88,7 +87,7 @@ export const NavMore = (props) => {
             </A>
           </div>
         </Div>
-      </MainContainer>
+      </Container>
       {/*   {isClicked ? <DisplayBlock clicked={isClicked} /> : null} */}
     </Form>
   );

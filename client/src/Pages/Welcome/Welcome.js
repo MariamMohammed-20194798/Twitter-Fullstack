@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import tw1 from "./../../imgs/tw1.jpg";
 import { FaTwitter } from "react-icons/fa";
-import Signin from "./../Auth/Signin/Signin";
-import Signup from "./../Auth/Signup/Signup";
+import Signin from "../Signin/Signin";
+import Signup from "../Signup/Signup";
 import Links from "./../../Components/Links/Links";
 import {
   Main,

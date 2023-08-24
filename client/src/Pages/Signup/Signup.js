@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import classes from "./Signup.module.css";
-import Input from "./../../../Components/Input/Input";
+import Input from "../../Components/Input/Input";
 import { Link, useNavigate } from "react-router-dom";
 function Signup(props) {
   const navigate = useNavigate();

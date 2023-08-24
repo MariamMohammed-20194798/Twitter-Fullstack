@@ -1,10 +1,10 @@
 import React from "react";
 import Home from "./Pages/Home/Home";
 import Welcome from "./Pages/Welcome/Welcome";
-import Layout from "./mainBlocks/Layout/Layout";
+import Layout from "./../src/Components/Layout/Layout";
 import { Div } from "./AppStyled";
-import Signin from "./Pages/Auth/Signin/Signin";
-import Signup from "./Pages/Auth/Signup/Signup";
+import Signin from "./Pages/Signin/Signin";
+import Signup from "./Pages/Signup/Signup";
 import { ThemeProvider } from "styled-components";
 import { themes } from "./styledComponents/themes";
 import UserProfile from "./Pages/UserProfile/UserProfile";

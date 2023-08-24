@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import instance from "../../../axios";
+import instance from "../../axios";
 import classes from "./Signin.module.css";
 import { FaTwitter } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
-import Input from "./../../../Components/Input/Input";
+import Input from "../../Components/Input/Input";
 import { Link, useNavigate } from "react-router-dom";
 function Signin(props) {
   const navigate = useNavigate();

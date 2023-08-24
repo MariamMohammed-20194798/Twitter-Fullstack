@@ -7,7 +7,6 @@ export const Form = styled.div`
   top: 0;
   left: 0;
   z-index: 1;
-
   @media (min-width: 960px) {
     position: fixed;
     padding-left: 16rem;
@@ -22,7 +21,6 @@ export const Div = styled.div`
   width: 24rem;
   border-radius: 0.9rem;
   position: relative;
-  z-index: 8000;
   background-color: ${({ theme }) => theme.theme.bgprimaryColor};
   box-shadow: ${({ theme }) => `4px 3px 20px 5px ${theme.theme.ShadowColor}`};
   @media (min-width: 1020px) {

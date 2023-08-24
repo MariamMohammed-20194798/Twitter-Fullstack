@@ -1,12 +1,5 @@
 import styled from "styled-components";
-
-export const Container = styled.div`
-  box-sizing: border-box;
-  margin-right: auto;
-  margin-left: auto;
-  padding-left: 0px;
-  padding-right: 0px;
-
+export const Div = styled.div`
   @media (min-width: 600px) {
     max-width: 786px;
     padding-left: 12px;

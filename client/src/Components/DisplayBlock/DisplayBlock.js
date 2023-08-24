@@ -8,8 +8,7 @@ import green from "../../assets/green.svg";
 import yellow from "../../assets/yellow.svg";
 import orange from "../../assets/orange.svg";
 import purple from "../../assets/purple.svg";
-import CloseMoreNav from "../CloseMoreNav/CloseMoreNav";
-import TweetPreview from "../TweetPreview/TweetPreview";
+
 import ButtonTheme from "../ButtonTheme/ButtonTheme";
 
 import {
@@ -69,12 +68,7 @@ const DisplayBlock = (props) => {
               browser. These settings are only visible to you.
             </P>
           </Header>
-          <DivDisplay>
-            <TweetPreview userimg={pic2} name="Mariam" handle="Mariam_mo7ammed">
-              At the heart of Twitter are short messages called Tweets — just
-              like this one — which can include photos, videos, links, text.
-            </TweetPreview>
-          </DivDisplay>
+          <DivDisplay></DivDisplay>
           <Div2>
             <div>
               <P title="true">Color</P>

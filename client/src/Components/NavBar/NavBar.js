@@ -103,31 +103,31 @@ color: ${(props) =>
             <P>Home</P>
           </Navlink>
         </Li>
-        <Li selected={pathname === "/explore" ? true : false}>
+        <Li>
           <Navlink to="/Home">
             <FiSearch />
             <P>Explore</P>
           </Navlink>
         </Li>
-        <Li selected={pathname === "/notifications" ? true : false}>
+        <Li>
           <Navlink to="/Home">
             <IoMdNotificationsOutline />
             <P>Notifications</P>
           </Navlink>
         </Li>
-        <Li selected={pathname === "/messages" ? true : false}>
+        <Li>
           <Navlink to="/Home">
             <FiMail />
             <P>Messages</P>
           </Navlink>
         </Li>
-        <Li selected={pathname === "/bookmarks" ? true : false}>
+        <Li>
           <Navlink to="/Home">
             <FaRegBookmark />
             <P>Bookmarks</P>
           </Navlink>
         </Li>
-        <Li selected={pathname === "/lists" ? true : false}>
+        <Li>
           <Navlink to="/Home">
             <IoIosList />
             <P>Lists</P>
