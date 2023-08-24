@@ -1,0 +1,32 @@
+[
+  {
+    "id": 0,
+    "name": "test",
+    "username": "test",
+    "email": "test@test.io",
+    "photo": "default.jpg",
+    "imageCover": "default.jpg",
+    "Bio": "welcome to my profile ",
+    "password": "test1234"
+  },
+  {
+    "id": 1,
+    "name": "user",
+    "username": "user",
+    "email": "user@test.io",
+    "photo": "default.jpg",
+    "imageCover": "default.jpg",
+    "Bio": "welcome to my profile ",
+    "password": "test1234"
+  },
+  {
+    "id": 2,
+    "name": "mariam",
+    "username": "maria",
+    "email": "mariam@test.io",
+    "photo": "default.jpg",
+    "imageCover": "default.jpg",
+    "Bio": "welcome to my profile ",
+    "password": "test1234"
+  }
+]
