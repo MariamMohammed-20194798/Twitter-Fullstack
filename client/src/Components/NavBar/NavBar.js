@@ -1,8 +1,8 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import instance from "../../axios";
 import styled from "styled-components";
 import userImg from "./../../imgs/default.jpeg";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { NavMore } from "../../Components/NavMore/NavMore";
 import { FaTwitter, FaRegBookmark } from "react-icons/fa";
 import { FiMail, FiMoreHorizontal, FiSearch } from "react-icons/fi";
@@ -11,6 +11,7 @@ import { BiHomeCircle } from "react-icons/bi";
 import { Div, Ul, Navlink, P, Img, Btn, Button } from "./NavBarStyled";
 
 const NavBar = () => {
+  // const { username } = useParams();
   const Li = styled.li`
 color: ${(props) =>
     props.selected
@@ -33,6 +34,7 @@ color: ${(props) =>
 
   &:hover {
     color: ${(props) => props.theme.buttonTheme.color};
+   
   }
 
   &:last-of-type {
@@ -74,13 +76,26 @@ color: ${(props) =>
       color: ${(props) => props.theme.buttonTheme.color};
     }
   `;
-  const handleSubmit = async (event) => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await instance.get(`users/me`);
+        console.log(res.data.data.data);
+        setData(res.data.data.data);
+      } catch (err) {
+        console.log("error", err.response.data.message);
+      }
+    })();
+  }, []);
+  /* const handleSubmit = async (event) => {
     try {
-      const res = await instance.post("users/me");
+      const res = await instance.get(`users/me`);
+      setusername(res.data.data.data.username);
     } catch (err) {
       console.log("error", err.response.data.message);
     }
-  };
+  }; */
   const [open, setOpen] = useState(false);
 
   const showModal = () => {
@@ -91,69 +106,71 @@ color: ${(props) =>
 
   return (
     <Div>
-      <Ul>
-        <Li>
-          <Navlink to="/Home">
-            <FaTwitter />
-          </Navlink>
-        </Li>
-        <Li selected={pathname === "/Home" ? true : false}>
-          <Navlink to="/Home">
-            <BiHomeCircle />
-            <P>Home</P>
-          </Navlink>
-        </Li>
-        <Li>
-          <Navlink to="/Home">
-            <FiSearch />
-            <P>Explore</P>
-          </Navlink>
-        </Li>
-        <Li>
-          <Navlink to="/Home">
-            <IoMdNotificationsOutline />
-            <P>Notifications</P>
-          </Navlink>
-        </Li>
-        <Li>
-          <Navlink to="/Home">
-            <FiMail />
-            <P>Messages</P>
-          </Navlink>
-        </Li>
-        <Li>
-          <Navlink to="/Home">
-            <FaRegBookmark />
-            <P>Bookmarks</P>
-          </Navlink>
-        </Li>
-        <Li>
-          <Navlink to="/Home">
-            <IoIosList />
-            <P>Lists</P>
-          </Navlink>
-        </Li>
-        <Li selected={pathname === "/UserProfile" ? true : false}>
-          <Navlink to="/UserProfile" onClick={handleSubmit}>
-            <Img alt="user" src={userImg} />
-            <P>Profile</P>
-          </Navlink>
-        </Li>
-        <Li>
-          <Btn onClick={showModal}>
-            <FiMoreHorizontal />
-            <P>More</P>
-          </Btn>
-        </Li>
-        <Li>
-          <Button>
-            <h3>Post</h3>
-            <IoIosAdd />
-          </Button>
-        </Li>
-      </Ul>
-
-      {open ? <NavMore showModal={showModal} /> : null}
+      {!open ? (
+        <Ul>
+          <Li>
+            <Navlink to="/Home">
+              <FaTwitter />
+            </Navlink>
+          </Li>
+          <Li selected={pathname === "/Home" ? true : false}>
+            <Navlink to="/Home">
+              <BiHomeCircle />
+              <P>Home</P>
+            </Navlink>
+          </Li>
+          <Li>
+            <Navlink to="/Home">
+              <FiSearch />
+              <P>Explore</P>
+            </Navlink>
+          </Li>
+          <Li selected={pathname === "/Notification" ? true : false}>
+            <Navlink to="/Notification">
+              <IoMdNotificationsOutline />
+              <P>Notifications</P>
+            </Navlink>
+          </Li>
+          <Li>
+            <Navlink to="/Home">
+              <FiMail />
+              <P>Messages</P>
+            </Navlink>
+          </Li>
+          <Li>
+            <Navlink to="/Home">
+              <FaRegBookmark />
+              <P>Bookmarks</P>
+            </Navlink>
+          </Li>
+          <Li>
+            <Navlink to="/Home">
+              <IoIosList />
+              <P>Lists</P>
+            </Navlink>
+          </Li>
+          <Li selected={pathname === `user/${data.username}` ? true : false}>
+            <Navlink to={`/user/${data.username}`}>
+              <Img alt="user" src={data.photo} />
+              <P>Profile</P>
+            </Navlink>
+          </Li>
+          <Li>
+            <Btn onClick={showModal}>
+              <FiMoreHorizontal />
+              <P>More</P>
+            </Btn>
+          </Li>
+          <Li>
+            <Button>
+              <h3>Post</h3>
+              <IoIosAdd />
+            </Button>
+          </Li>
+        </Ul>
+      ) : (
+        <NavMore showModal={showModal} data={data} />
+      )}
     </Div>
   );
 };

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Form = styled.div`
-  width: 28rem;
+  width: 23rem;
   position: fixed;
   padding: 1rem;
 `;
@@ -13,7 +13,7 @@ export const DivSearch = styled.div`
   align-items: center;
 `;
 export const DivIcon = styled.div`
-  color: ${({ theme }) => theme.theme.secondaryTextColor};
+  color: ${({ theme }) => theme.buttonTheme.color};
   position: relative;
   left: 32px;
   top: 3px;

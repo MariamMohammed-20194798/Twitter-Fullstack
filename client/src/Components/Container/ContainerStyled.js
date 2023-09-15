@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 export const Div = styled.div`
   @media (min-width: 600px) {
     max-width: 786px;

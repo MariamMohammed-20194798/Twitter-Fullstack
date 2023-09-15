@@ -1,66 +1,54 @@
 import styled from "styled-components";
 
-export const Main = styled.main`
-  height: 98vh;
-  display: grid;
-  grid-template-rows: 95% 5%;
-`;
-
 export const Container = styled.div`
-  display: grid;
-  grid-template-columns: 55% 45%;
-`;
-export const Img = styled.img`
+  position: fixed;
   width: 100%;
-  height: 94.5vh;
-`;
-export const Fatwitter1 = styled.i`
-  position: absolute;
-  top: 20rem;
-  left: 25rem;
-  color: white;
-  font-size: 30rem;
-`;
-export const ContentContainer = styled.div`
   display: flex;
-  margin-top: 15em;
-  margin-left: 5rem;
+  text-align: center;
+  align-self: center;
   flex-direction: column;
+  background-color: ${({ theme }) => theme.theme.bgprimaryColor};
 `;
 export const Fatwitter2 = styled.i`
-  font-size: 3.5rem;
+  font-size: 4rem;
+  margin-top: 4em;
   margin-bottom: 3rem;
   color: rgb(29, 155, 240);
 `;
 export const Strong = styled.strong`
+  color: ${({ theme }) => theme.theme.primaryTextColor};
   font-size: ${(el) => (el.primary ? " 6rem" : "2.5rem")};
 `;
 
 export const CreateBtn = styled.button`
-  width: 50%;
-  height: 5vh;
+  padding: 1rem 7.5rem;
   border: none;
   font-size: 1.5rem;
   font-weight: bold;
   color: #ffffff;
   margin-top: 3rem;
   border-radius: 5rem;
+  text-align: center;
+  align-self: center;
   background-color: rgb(29, 155, 240);
   &:hover {
     background-color: rgb(7, 101, 163);
   }
 `;
 export const Text = styled.strong`
-  margin-top: 5rem;
+  color: ${({ theme }) => theme.theme.primaryTextColor};
+  margin-top: 4rem;
   font-size: 1.5rem;
 `;
 export const SigninBtn = styled.button`
-  width: 50%;
-  height: 5vh;
+  padding: 1rem 10rem;
+  margin-bottom: 15em;
   font-weight: bold;
   font-size: 1.5rem;
   border-radius: 5rem;
   margin-top: 2rem;
+  text-align: center;
+  align-self: center;
   color: rgb(29, 155, 240);
   background-color: #ffffff;
   border: 0.1rem solid #cfd9de;

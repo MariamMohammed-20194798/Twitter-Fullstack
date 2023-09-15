@@ -20,9 +20,9 @@ const Home = () => {
     (async () => {
       try {
         setLoading(true);
-        const res = await instance.get("users/getAllTweets");
+        const res = await instance.get("users/getTweets");
         if (res.data.status === "success") {
-          setTweets(res.data.data);
+          setTweets(res.data.data.data);
         }
       } catch (err) {
         console.log("error", err.response.data.message);
@@ -40,13 +40,14 @@ const Home = () => {
         <WiStarsIcon />
       </Header>
       <Border />
-      <AddPost />
-      {tweets.map((tweet) => (
-        <div key={tweet._id}>
-          <Tweet text={tweet.text} user={tweet.user} />
-        </div>
-      ))}
-
+      <AddPost setTweetData={setTweets} tweetData={tweets} />
+      <div>
+        {tweets.map((tweet) => (
+          <div key={tweet._id}>
+            <Tweet text={tweet.text} user={tweet.user} tweetImg={tweet.photo} />
+          </div>
+        ))}
+      </div>
       {isLoading ? (
         <DivSpinner>
           <Spinner />

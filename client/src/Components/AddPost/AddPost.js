@@ -1,10 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Button } from "../Button/Button";
-import axios from "axios";
 import instance from "../../axios";
-import userImg from "./../../imgs/default.jpeg";
 import { FiImage, FiSmile, FiCalendar } from "react-icons/fi";
-
 import {
   Div,
   DivImg,
@@ -20,43 +17,47 @@ import {
   DivRightTweet,
   DivRightTweetIcon,
 } from "./AddpostStyled";
+import { useReloadState } from "../../styledComponents/reloadStore";
+import Tweet from "../Tweet/Tweet";
 
-const AddPost = () => {
+const AddPost = ({ setTweetData, tweetData }) => {
   const textareaRef = useRef(null);
-  const [img, setImg] = useState(null);
+  const [tweetImage, setTweetImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
+  const [userPhoto, setUserPhoto] = useState();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await instance.get(`users/me`);
+        setUserPhoto(res.data.data.data.photo);
+      } catch (err) {
+        console.log("error", err.response.data.message);
+      }
+    })();
+  }, []);
 
   const sendTweet = async () => {
+    let formdata = new FormData();
     const text = textareaRef.current.value;
-    try {
-      if (text || img) {
-        let res = await instance.post("users/addTweet", { text });
-        if (img) res = await instance.post("users/addTweet", { img });
-        sendTweet(res);
-        setPreviewImage(null);
-        setImg(null);
-      }
-    } catch (error) {
-      console.error("Error sending tweet:", error);
+    if (tweetImage) {
+      console.log(tweetImage);
+      formdata.append("photo", tweetImage);
+    } else {
+      formdata.append("text", text);
+      textareaRef.current.value = "";
     }
-  };
 
-  /*  const handleSendTweet = () => {
-    const text = textareaRef.current.value;
-    if (text || tweetImage) {
-      const formData = new FormData();
-      if (tweetImage)
-        formData.append("tweetPhoto", tweetImage, tweetImage.name);
-      formData.append("text", text);
-      sendTweet(formData);
-      setPreviewImage(null);
-      setTweetImage(null);
-    }
-  }; */
+    const res = await instance.post("users/addTweet", formdata);
+    const data = res.data.data;
+    //setTweetData((prev) => [data, ...prev]);
+    setPreviewImage(null);
+    setTweetImage(null);
+  };
 
   const getTweetImage = async (e) => {
     let file = e.target.files[0];
-    setImg(file);
+    setTweetImage(file);
     let reader = new FileReader();
     reader.onload = (e) => {
       setPreviewImage(e.target.result);
@@ -67,7 +68,7 @@ const AddPost = () => {
   return (
     <Div>
       <DivImg>
-        <Img src={userImg} alt="user" />
+        <Img src={userPhoto} alt="user" />
       </DivImg>
       <DivTweet>
         <TextArea
@@ -85,7 +86,6 @@ const AddPost = () => {
             <Img2 src={previewImage} alt="preview" />
           </DivAddImg>
         )}
-
         <DivRightTweet>
           <DivRightTweetIcon>
             <Input type="file" id="img" onChange={getTweetImage} />
@@ -117,4 +117,5 @@ const AddPost = () => {
     </Div>
   );
 };
+
 export default AddPost;

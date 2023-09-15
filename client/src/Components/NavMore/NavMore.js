@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import CloseMoreNav from "./../CloseMoreNav/CloseMoreNav";
 import Container from "./../Container/Container";
@@ -7,6 +7,7 @@ import { TiFolder } from "react-icons/ti";
 import { GiElectric } from "react-icons/gi";
 import { FaBattleNet } from "react-icons/fa";
 import { IoIosPulse } from "react-icons/io";
+import instance from "../../axios";
 import {
   FiEdit,
   FiExternalLink,
@@ -21,9 +22,9 @@ export const NavMore = (props) => {
       <Container>
         <Div onClick={props.showModal}>
           <DivImg>
-            <Img src={defaultImg} alt="UserImg" />
-            <P primary>Mariam</P>
-            <P>@Maro_Muhammed</P>
+            <Img src={props.data.photo} alt="UserImg" />
+            <P primary>{props.data.name}</P>
+            <P>@{props.data.username}</P>
           </DivImg>
           <Border />
           <div>

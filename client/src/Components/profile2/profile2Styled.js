@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 export const DivCover = styled.div`
   width: 100%;
-  display: flex;
-  position: relative;
 `;
 export const CoverImg = styled.img`
   width: 100%;
@@ -90,6 +88,8 @@ export const Lable = styled.label`
 
 export const CameraIcon = styled.i`
   position: absolute;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   z-index: 5;
   font-size: 3rem;
@@ -109,7 +109,7 @@ export const DivInput = styled.div`
   margin-top: 2rem;
 `;
 export const Input = styled.input`
-  width: 90%;
+  width: 100%;
   background-color: ${(props) => props.theme.theme.bgsecondaryColor};
   border: none;
   margin-bottom: 1.7rem;
@@ -117,7 +117,7 @@ export const Input = styled.input`
   outline: none;
   font-size: 1.5rem;
   color: ${(props) => props.theme.theme.primaryTextColor};
-  border-bottom: 1px solid ${(props) => props.theme.buttonTheme.color};
+  border-bottom: 1px solid ${(props) => props.theme.theme.secondaryTextColor};
 `;
 export const Image = styled.i`
   position: absolute;

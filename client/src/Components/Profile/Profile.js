@@ -1,15 +1,15 @@
 import { React } from "react";
+import { useUsernameStore } from "../../styledComponents/useUsernameStore";
 import defaultCover from "./../../imgs/defaultCover.jpg";
 import defaultImg from "./../../imgs/default.jpeg";
 import { FiCamera } from "react-icons/fi";
-
 import {
   DivCover,
   CoverImg,
   DivPhoto,
   Img,
   Button,
-  DivUsername,
+  DivUserInfo,
   P,
   Bio,
   Border,
@@ -21,80 +21,101 @@ import {
 } from "./ProfileStyled";
 const Profile = {
   Default: (props) => {
+    const username = useUsernameStore((state) => state.username);
     return (
       <div>
         <DivCover>
-          <CoverImg alt="CoverTmg" src={defaultCover} />
+          <CoverImg src={props.cover} alt="userCover" />
         </DivCover>
         <DivPhoto>
           <div>
-            <Img src={defaultImg} alt="user" />
+            <Img src={props.photo} alt="user" />
           </div>
+          {/* {props.userName === username.username ? (
+            <div>
+              <Button btn onClick={props.editProfileHandler}>
+                Edit Profile
+              </Button>
+            </div>
+          ) : (
+            ""
+          )} */}
           <div>
-            <Button trans onClick={props.editProfileHandler}>
+            <Button btn onClick={props.editProfileHandler}>
               Edit Profile
             </Button>
           </div>
         </DivPhoto>
-        <DivUsername>
+        <DivUserInfo>
           <P>{props.name}</P>
-          <P secondary>@{props.username}</P>
+          <P secondary>{props.email}</P>
           <Bio>{props.bio}</Bio>
-        </DivUsername>
+        </DivUserInfo>
         <Border />
       </div>
     );
   },
+
   Edit: (props) => {
     return (
       <div>
         <DivCover>
-          <input id="coverImage" type="file" hidden />
-          <Lable htmlFor="coverImage">
+          <input
+            id="coverImage"
+            type="file"
+            onChange={props.coverChangeHandler}
+            hidden
+          />
+          <Lable for="coverImage">
             <Image>
               <FiCamera />
             </Image>
-            <CoverImg src={defaultCover} alt="user cover" />
+            <CoverImg src={props.cover} alt="userCover" />
           </Lable>
         </DivCover>
         <DivPhoto>
           <div>
-            <input id="userImage" type="file" hidden />
-            <Lable htmlFor="userImage">
+            <input
+              id="userImage"
+              type="file"
+              onChange={props.photoChangeHandler}
+              hidden
+            />
+            <Lable for="userImage">
               <CameraIcon>
                 <FiCamera />
               </CameraIcon>
-              <Img src={defaultImg} alt="user" />
+              <Img src={props.photo} alt="user" />
             </Lable>
           </div>
           <div>
-            <Button trans margin onClick={props.closeEdit}>
+            <Button btn margin onClick={props.closeProfileEdit}>
               Cancel
             </Button>
-            <Button>Save</Button>
+            <Button onClick={props.saveProfileEdit}>Save</Button>
           </div>
         </DivPhoto>
         <DivInput>
           <Input
-            value={props.name}
             type="text"
-            placeholder="Your Name"
             name="name"
-            defaultValue="Mariam"
+            placeholder="Your Name"
+            defaultValue={props.name}
+            onChange={props.nameChangeHandler}
           />
           <Input
-            value={props.email}
             type="text"
-            placeholder="Your email"
             name="email"
-            defaultValue="mariam272"
+            placeholder="Your Email"
+            defaultValue={props.email}
+            onChange={props.emailChangeHandler}
           />
           <Input
-            value={props.bio}
             type="text"
+            name="bio"
             placeholder="Your Bio"
-            name="Bio"
-            defaultValue="Welocme To My Profile"
+            defaultValue={props.bio}
+            onChange={props.bioChangeHandler}
           />
         </DivInput>
       </div>

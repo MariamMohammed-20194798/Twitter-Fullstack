@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Box from "@mui/material/Box";
 export const P = styled.p`
   color: ${({ theme }) => theme.theme.primaryTextColor};
   font-weight: ${(props) => (props.paragraph ? "400" : "700")};
@@ -100,11 +101,31 @@ export const Border = styled.div`
   border-bottom: 1px solid rgba(204, 204, 204, 0.2);
 `;
 
-export const Image = styled.div`
+export const DivImg = styled.div`
+  background-image: url(${(props) => props.imageUrl});
   width: auto;
-  height: 30rem;
+  height: 28rem;
+  margin-bottom: 1.3rem;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 1rem;
+`;
+export const BoxDiv = styled(Box)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  border-radius: 1.5rem;
+  transform: translate(-50%, -50%);
+  justify-content: center;
+  align-items: center;
+`;
+export const DivPhotoModal = styled.img`
+  position: absolute;
+  display: flex;
+  border-radius: 1.5rem;
+  transform: translate(-50%, -50%);
+  justify-content: center;
+  align-items: center;
 `;

@@ -31,12 +31,13 @@ export const DivTweet = styled.div`
 export const TextArea = styled.textarea`
   width: 100%;
   background-color: transparent;
+  padding: 0rem 0rem 0rem 1rem;
+  resize: none;
   border: none;
   outline: none;
   font-size: 2.5rem;
-  margin-top: 2.5rem;
+  margin-top: 3rem;
   margin-bottom: -1rem;
-  font-family: inherit;
   overflow: hidden;
   color: ${({ theme }) => theme.theme.primaryTextColor};
   &::placeholder {

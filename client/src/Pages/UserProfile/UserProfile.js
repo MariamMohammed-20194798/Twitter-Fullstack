@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import instance from "../../axios";
 import Tweet from "../../Components/Tweet/Tweet";
@@ -15,38 +16,87 @@ import {
 } from "./UserProfileStyled";
 import { Button } from "./../../Components/Button/Button";
 const UserProfile = () => {
-  const [loading, setLoading] = useState(true);
-  const [name, setName] = useState([]);
-  const [email, setEmail] = useState([]);
-  const [username, setUsername] = useState([]);
-  const [bio, setBio] = useState([]);
-  const [tweetsNum, setTweetsnum] = useState();
-  const [editProf, setEditProf] = useState(false);
+  const { userName } = useParams();
+  const [bio, setBio] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [tweets, setTweets] = useState([]);
+  const [photo, setPhoto] = useState("photo");
+  const [cover, setCover] = useState("cover");
+  const [reload, setReload] = useState(false);
+  const [tweetsNum, setTweetsnum] = useState();
+  const [loading, setLoading] = useState(true);
+  const [editProf, setEditProf] = useState(false);
+
+  const isReload = () => {
+    setReload((prev) => !prev);
+  };
+
   useEffect(() => {
     (async () => {
-      setLoading(true);
+      setLoading(false);
       try {
-        const res = await instance.get("users/me");
+        const res = await instance.get(`users/${userName}`);
         setName(res.data.data.data.name);
         setEmail(res.data.data.data.email);
-        setUsername(res.data.data.data.username);
         setBio(res.data.data.data.Bio);
-        const userTweets = await instance.get(`users/${username}/tweets/`);
+        setPhoto(res.data.data.data.photo);
+        setCover(res.data.data.data.cover);
+        const userTweets = await instance.get(`users/${userName}/tweets/`);
         setTweets(userTweets.data.data.data);
         setTweetsnum(userTweets.data.results);
       } catch (err) {
         setLoading(false);
       }
     })();
-  }, [username]);
+  }, [userName]);
+
+  const nameChangeHandler = (e) => {
+    setName(e.target.value);
+  };
+  const emailChangeHandler = (e) => {
+    setEmail(e.target.value);
+  };
+  const bioChangeHandler = (e) => {
+    setBio(e.target.value);
+  };
+  const photoChangeHandler = (e) => {
+    setPhoto(e.target.files[0]);
+    if (e.target.files && e.target.files[0]) {
+      setPhoto(URL.createObjectURL(e.target.files[0]));
+    }
+  };
+  const coverChangeHandler = (e) => {
+    setCover(e.target.files[0]);
+    if (e.target.files && e.target.files[0]) {
+      setCover(URL.createObjectURL(e.target.files[0]));
+    }
+  };
 
   const editProfileHandler = () => {
     setEditProf(true);
   };
 
-  const closeEdit = () => {
+  const saveProfileEdit = async () => {
+    try {
+      let formdata = new FormData();
+      formdata.append("name", name);
+      formdata.append("email", email);
+      formdata.append("bio", bio);
+      formdata.append("photo", photo);
+      formdata.append("cover", cover);
+      await instance.patch(`users/updateMe`, formdata);
+      isReload();
+      setEditProf(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const closeProfileEdit = () => {
     setEditProf(false);
+    setPhoto(null);
+    setCover(null);
   };
 
   return (
@@ -74,16 +124,28 @@ const UserProfile = () => {
           {" "}
           {editProf ? (
             <Profile.Edit
+              bio={bio}
               name={name}
               email={email}
-              bio={bio}
-              username={username}
-              closeEdit={closeEdit}
+              photo={photo}
+              cover={cover}
+              userName={userName}
+              photoChangeHandler={photoChangeHandler}
+              coverChangeHandler={coverChangeHandler}
+              nameChangeHandler={nameChangeHandler}
+              emailChangeHandler={emailChangeHandler}
+              bioChangeHandler={bioChangeHandler}
+              closeProfileEdit={closeProfileEdit}
+              saveProfileEdit={saveProfileEdit}
             />
           ) : (
             <Profile.Default
               bio={bio}
-              username={username}
+              name={name}
+              email={email}
+              photo={photo}
+              cover={cover}
+              userName={userName}
               editProfileHandler={editProfileHandler}
             />
           )}
@@ -92,7 +154,7 @@ const UserProfile = () => {
       <Border />
       {tweets.map((tweet) => (
         <div key={tweet._id}>
-          <Tweet text={tweet.text} user={tweet.user} />
+          <Tweet text={tweet.text} user={tweet.user} tweetImg={tweet.photo} />
         </div>
       ))}
     </Div>

@@ -9,7 +9,7 @@ export const Div = styled.div`
   }
   color: ${(props) =>
     props.Header
-      ? props.theme.theme.secondaryTextColor
+      ? props.theme.buttonTheme.color
       : props.theme.theme.primaryTextColor};
   padding: ${(props) => (props.Header ? "0.5rem" : "")};
   border-radius: ${(props) => (props.Header ? "3rem" : "")};

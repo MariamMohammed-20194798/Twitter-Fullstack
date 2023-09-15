@@ -3,8 +3,10 @@ import { Span, P, Div, DivIcon, Input, Label } from "./ButtonThemeStyled";
 
 const ButtonTheme = (props) => {
   const changeTheme = useThemeStore((state) => state.changeTheme);
+
   const handleClick = () => {
     changeTheme(`${props.id}`);
+    localStorage.setItem("finalTheme", props.id);
     props.onHandle();
   };
   return (

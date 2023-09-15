@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { AiOutlineClose } from "react-icons/ai";
 import classes from "./Signup.module.css";
 import Input from "../../Components/Input/Input";
-import { Link, useNavigate } from "react-router-dom";
+import instance from "../../axios";
+import { useNavigate } from "react-router-dom";
 function Signup(props) {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -10,98 +10,89 @@ function Signup(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-  };
-  const fetchData = async () => {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    try {
+      event.preventDefault();
 
-    var raw = JSON.stringify({
-      name,
-      email,
-      username,
-      password,
-      confirmPassword,
-    });
+      if (!name || !email || !username || !password || !confirmPassword)
+        setErrorMsg("Please Fill All Fields.");
 
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-
-    fetch(`http://localhost:8000/api/v1/users/signup`, requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        console.log(result);
-        if (result.status === "success") {
+      if (name && email && username && password && confirmPassword) {
+        const res = await instance.post("users/signup", {
+          name,
+          email,
+          username,
+          password,
+          confirmPassword,
+        });
+        if (res.data.status === "success") {
+          console.log(res);
           navigate("/Home");
         }
-      });
+      }
+    } catch (err) {
+      console.log(err.response.data);
+      if (
+        err.response.data.message.includes(
+          "E11000 duplicate key error collection"
+        )
+      ) {
+        setErrorMsg(`User with this email already exists.`);
+      } else if (err.response.data.message.includes("User validation failed")) {
+        setErrorMsg(`Passwords are not the same!`);
+      }
+    }
   };
 
   return (
     <>
-      <div className={classes.mainContainer}>
-        <form className={classes.form} onSubmit={handleSubmit}>
-          <div className={classes.iconsBox}>
-            <AiOutlineClose
-              onClick={props.onCloseSignup}
-              className={classes.icon1}
-            ></AiOutlineClose>
-          </div>
-          <div className={classes.title}>
-            <strong>Create your account</strong>
-          </div>
-          <Input
-            type="text"
-            id="name"
-            placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <Input
-            type="text"
-            id="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Input
-            type="text"
-            id="username"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <Input
-            type="password"
-            id="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Input
-            type="password"
-            id="confirmPassword"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-          <button className={classes.nextBtn} type="submit">
-            Sign Up
-          </button>
-          <h3>
-            You have already an account ?{" "}
-            <Link to="/Signin" className={classes.link} onClick={fetchData}>
-              SignIn
-            </Link>
-          </h3>
-        </form>
-      </div>
+      <form className={classes.form} onSubmit={handleSubmit}>
+        <div className={classes.title}>
+          <strong>Create your account</strong>
+        </div>
+        <Input
+          type="text"
+          id="name"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <Input
+          type="text"
+          id="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          type="text"
+          id="username"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <Input
+          type="password"
+          id="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <Input
+          type="password"
+          id="confirmPassword"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+        {errorMsg && <p className={classes.p}>{errorMsg}</p>}
+        <button className={classes.nextBtn} type="submit">
+          Sign Up
+        </button>
+      </form>
     </>
   );
 }

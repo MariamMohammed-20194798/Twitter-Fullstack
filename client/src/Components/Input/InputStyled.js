@@ -4,7 +4,7 @@ export const InputText = styled.input`
   height: 6.5vh;
   padding: 1.5rem;
   font-size: 1.3rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   border-radius: 0.4rem;
   border: 0.1rem solid #cfd9de;
   color: ${(props) => props.theme.primaryTextColor};

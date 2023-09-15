@@ -10,15 +10,8 @@
 }
 
 .form {
-  margin: auto;
-  height: 75%;
-  max-width: 50rem;
-  margin-top: 12rem;
-  border-radius: 2rem;
   text-align: center;
   align-self: center;
-  flex-direction: column;
-  background-color: #ffffff;
 }
 
 .icon1 {
@@ -29,7 +22,8 @@
 }
 
 .title {
-  margin-right: 11rem;
+  text-align: center;
+  align-self: center;
   font-size: 2.5rem;
   padding-bottom: 2rem;
 }
@@ -56,4 +50,9 @@
 
 .link:hover {
   text-decoration: underline;
+}
+
+.p {
+  color: red;
+  font-weight: bold;
 }
