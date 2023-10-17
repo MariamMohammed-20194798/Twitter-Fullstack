@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 export const Div = styled.div`
   padding: 2rem;
-  margin-left: 30rem;
+  margin-left: 24rem;
   height: 100vh;
   position: fixed;
   @media (max-width: 1281px) {

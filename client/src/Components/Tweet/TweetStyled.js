@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Box from "@mui/material/Box";
+
 export const P = styled.p`
   color: ${({ theme }) => theme.theme.primaryTextColor};
   font-weight: ${(props) => (props.paragraph ? "400" : "700")};
@@ -54,7 +55,6 @@ export const FiDiv = styled.div`
   justify-content: space-around;
   align-content: center;
   align-item: center;
-  padding: 0rem 2rem;
   margin-left: -2.5rem;
 
   svg {
@@ -121,6 +121,7 @@ export const BoxDiv = styled(Box)`
   justify-content: center;
   align-items: center;
 `;
+
 export const DivPhotoModal = styled.img`
   position: absolute;
   display: flex;

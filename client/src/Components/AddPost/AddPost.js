@@ -17,8 +17,6 @@ import {
   DivRightTweet,
   DivRightTweetIcon,
 } from "./AddpostStyled";
-import { useReloadState } from "../../styledComponents/reloadStore";
-import Tweet from "../Tweet/Tweet";
 
 const AddPost = ({ setTweetData, tweetData }) => {
   const textareaRef = useRef(null);

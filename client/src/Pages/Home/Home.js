@@ -1,4 +1,3 @@
-import axios from "axios";
 import Tweet from "../../Components/Tweet/Tweet";
 import { React, useState, useEffect } from "react";
 import AddPost from "../../Components/AddPost/AddPost";
@@ -44,7 +43,14 @@ const Home = () => {
       <div>
         {tweets.map((tweet) => (
           <div key={tweet._id}>
-            <Tweet text={tweet.text} user={tweet.user} tweetImg={tweet.photo} />
+            <Tweet
+              id={tweet._id}
+              text={tweet.text}
+              numOfLikes={tweet.likes}
+              numOfComments={tweet.comments}
+              user={tweet.user}
+              tweetImg={tweet.photo}
+            />
           </div>
         ))}
       </div>

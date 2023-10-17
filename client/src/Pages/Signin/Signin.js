@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import instance from "../../axios";
-import classes from "./Signin.module.css";
-import { FaTwitter } from "react-icons/fa";
 import Input from "../../Components/Input/Input";
 import { useUsernameStore } from "../../styledComponents/useUsernameStore";
 import { useNavigate } from "react-router-dom";
+import { Div, Title, BtnBox, BtnLogin, FaTwitterIcon, P } from "./SigninStyled";
 function Signin(props) {
   const setUsername = useUsernameStore((state) => state.setUsername);
 
@@ -36,13 +35,13 @@ function Signin(props) {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <div className={classes.div}>
-          <FaTwitter size={50} className={classes.icon2} />
-        </div>
-        <div className={classes.title}>
+        <Div>
+          <FaTwitterIcon size={50} />
+        </Div>
+        <Title>
           <strong>Sign in to Twitter</strong>
-        </div>{" "}
-        <div className={classes.div}>
+        </Title>{" "}
+        <Div>
           <Input
             type="text"
             id="email"
@@ -57,17 +56,13 @@ function Signin(props) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </div>
-        {errorMsg && <p className={classes.p}>{errorMsg}</p>}
-        <div className={classes.btnBox}>
-          <button
-            className={classes.loginBtn}
-            type="submit"
-            onClick={props.OnSignin}
-          >
+        </Div>
+        {errorMsg && <P>{errorMsg}</P>}
+        <BtnBox>
+          <BtnLogin type="submit" onClick={props.OnSignin}>
             Log in
-          </button>
-        </div>
+          </BtnLogin>
+        </BtnBox>
       </form>
     </>
   );

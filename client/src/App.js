@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useEffect } from "react";
 import instance from "./axios";
 import { Div } from "./AppStyled";

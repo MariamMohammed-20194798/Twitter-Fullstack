@@ -1,13 +1,13 @@
 import React from "react";
-import classes from "./Spinner.module.css";
+import { Div } from "./SpinnerStyled";
 
 export const Spinner = () => {
   return (
-    <div className={classes.ldsRing}>
+    <Div>
       <div></div>
       <div></div>
       <div></div>
       <div></div>
-    </div>
+    </Div>
   );
 };

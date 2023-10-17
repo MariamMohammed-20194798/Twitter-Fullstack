@@ -5,14 +5,14 @@ export const Div = styled.div`
   min-height: 100vh;
 `;
 export const Main = styled.main`
-  margin-left: 50rem;
+  margin-left: 45rem;
   border-left: 1px solid rgba(204, 204, 204, 0.2);
   display: flex;
   justify-content: space-between;
   @media (max-width: 1024px) {
-    margin-left: 13rem;
+    margin-left: 15rem;
   }
 `;
 export const DivIn = styled.div`
-  width: 155rem;
+  width: 165rem;
 `;

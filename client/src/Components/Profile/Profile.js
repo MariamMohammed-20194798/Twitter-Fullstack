@@ -1,7 +1,5 @@
 import { React } from "react";
 import { useUsernameStore } from "../../styledComponents/useUsernameStore";
-import defaultCover from "./../../imgs/defaultCover.jpg";
-import defaultImg from "./../../imgs/default.jpeg";
 import { FiCamera } from "react-icons/fi";
 import {
   DivCover,
@@ -31,7 +29,7 @@ const Profile = {
           <div>
             <Img src={props.photo} alt="user" />
           </div>
-          {/* {props.userName === username.username ? (
+          {props.userName === username.username ? (
             <div>
               <Button btn onClick={props.editProfileHandler}>
                 Edit Profile
@@ -39,12 +37,7 @@ const Profile = {
             </div>
           ) : (
             ""
-          )} */}
-          <div>
-            <Button btn onClick={props.editProfileHandler}>
-              Edit Profile
-            </Button>
-          </div>
+          )}
         </DivPhoto>
         <DivUserInfo>
           <P>{props.name}</P>

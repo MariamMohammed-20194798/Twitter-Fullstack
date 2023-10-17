@@ -1,7 +1,6 @@
 import * as React from "react";
 import Color from "./../Color/Color";
 import Modal from "@mui/material/Modal";
-import pic2 from "./../../imgs/pic2.jpeg";
 import blue from "../../assets/blue.svg";
 import pink from "../../assets/pink.svg";
 import green from "../../assets/green.svg";
@@ -26,7 +25,7 @@ import {
   DivDisplay,
 } from "./DisplayBlockSyled";
 
-const DisplayBlock = (props) => {
+const DisplayBlock = () => {
   const [isChecked, setIsChecked] = React.useState("LightMode");
   const [isCheckedButton, setIsCheckedButton] = React.useState("blue");
   const handleClick = (Id) => {

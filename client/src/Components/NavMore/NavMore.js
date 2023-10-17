@@ -1,13 +1,11 @@
-import { React, useState, useEffect } from "react";
+import { React } from "react";
 import { NavLink } from "react-router-dom";
-import CloseMoreNav from "./../CloseMoreNav/CloseMoreNav";
 import Container from "./../Container/Container";
-import defaultImg from "./../../imgs/default.jpeg";
 import { TiFolder } from "react-icons/ti";
 import { GiElectric } from "react-icons/gi";
 import { FaBattleNet } from "react-icons/fa";
 import { IoIosPulse } from "react-icons/io";
-import instance from "../../axios";
+
 import {
   FiEdit,
   FiExternalLink,
@@ -18,7 +16,6 @@ import { Form, Div, DivImg, Img, P, Border, A } from "./NavMoreStyled";
 export const NavMore = (props) => {
   return (
     <Form>
-      <CloseMoreNav bgColor={`transparent`} clicked={props.showModal} />
       <Container>
         <Div onClick={props.showModal}>
           <DivImg>
@@ -89,7 +86,6 @@ export const NavMore = (props) => {
           </div>
         </Div>
       </Container>
-      {/*   {isClicked ? <DisplayBlock clicked={isClicked} /> : null} */}
     </Form>
   );
 };

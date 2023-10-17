@@ -1,5 +1,5 @@
 import React from "react";
-import { Main, DivIn, Div } from "./LayoutStyled";
+import { Main, DivIn } from "./LayoutStyled";
 import Container from "../Container/Container";
 import NavBar from "../NavBar/NavBar";
 import { RightSide } from "../RightSide/RightSide";

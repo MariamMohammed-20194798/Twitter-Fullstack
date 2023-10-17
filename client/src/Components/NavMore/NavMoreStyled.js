@@ -13,7 +13,7 @@ export const Form = styled.div`
   }
   @media (min-width: 1020px) {
     position: fixed;
-    padding-left: 29rem;
+    padding-left: 23rem;
   }
 `;
 

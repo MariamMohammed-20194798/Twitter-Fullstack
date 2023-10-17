@@ -1,17 +1,15 @@
 import { React, useState, useEffect } from "react";
 import instance from "../../axios";
 import styled from "styled-components";
-import userImg from "./../../imgs/default.jpeg";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { NavMore } from "../../Components/NavMore/NavMore";
 import { FaTwitter, FaRegBookmark } from "react-icons/fa";
 import { FiMail, FiMoreHorizontal, FiSearch } from "react-icons/fi";
 import { IoMdNotificationsOutline, IoIosList, IoIosAdd } from "react-icons/io";
 import { BiHomeCircle } from "react-icons/bi";
-import { Div, Ul, Navlink, P, Img, Btn, Button } from "./NavBarStyled";
+import { Div, Ul, Navlink, P, Img, Button } from "./NavBarStyled";
 
 const NavBar = () => {
-  // const { username } = useParams();
   const Li = styled.li`
 color: ${(props) =>
     props.selected
@@ -24,7 +22,6 @@ color: ${(props) =>
   border-radius: 3.5rem;
   font-weight: 900;
   text-decoration: none;
-  outline: none;
   outline: none;
   cursor: pointer;
   img {
@@ -81,21 +78,13 @@ color: ${(props) =>
     (async () => {
       try {
         const res = await instance.get(`users/me`);
-        console.log(res.data.data.data);
         setData(res.data.data.data);
       } catch (err) {
         console.log("error", err.response.data.message);
       }
     })();
   }, []);
-  /* const handleSubmit = async (event) => {
-    try {
-      const res = await instance.get(`users/me`);
-      setusername(res.data.data.data.username);
-    } catch (err) {
-      console.log("error", err.response.data.message);
-    }
-  }; */
+
   const [open, setOpen] = useState(false);
 
   const showModal = () => {

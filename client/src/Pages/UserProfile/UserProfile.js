@@ -154,7 +154,14 @@ const UserProfile = () => {
       <Border />
       {tweets.map((tweet) => (
         <div key={tweet._id}>
-          <Tweet text={tweet.text} user={tweet.user} tweetImg={tweet.photo} />
+          <Tweet
+            text={tweet.text}
+            user={tweet.user}
+            tweetImg={tweet.photo}
+            id={tweet._id}
+            numOfLikes={tweet.likes}
+            numOfComments={tweet.comments}
+          />
         </div>
       ))}
     </Div>
