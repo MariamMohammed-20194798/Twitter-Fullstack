@@ -13,15 +13,18 @@ import {
   WiStarsIcon,
 } from "./HomeStyled";
 const Home = () => {
-  const [tweets, setTweets] = useState([]);
+  const [tweetData, setTweetData] = useState([]);
   const [isLoading, setLoading] = useState(true);
+
   useEffect(() => {
     (async () => {
       try {
         setLoading(true);
         const res = await instance.get("users/getTweets");
         if (res.data.status === "success") {
-          setTweets(res.data.data.data);
+          const data = await res.data.data.data;
+          console.log(data);
+          setTweetData(data);
         }
       } catch (err) {
         console.log("error", err.response.data.message);
@@ -39,15 +42,14 @@ const Home = () => {
         <WiStarsIcon />
       </Header>
       <Border />
-      <AddPost setTweetData={setTweets} tweetData={tweets} />
+      <AddPost setTweetData={setTweetData} />
       <div>
-        {tweets.map((tweet) => (
+        {tweetData.map((tweet) => (
           <div key={tweet._id}>
             <Tweet
               id={tweet._id}
               text={tweet.text}
-              numOfLikes={tweet.likes}
-              numOfComments={tweet.comments}
+              likes={tweet.likes}
               user={tweet.user}
               tweetImg={tweet.photo}
             />
