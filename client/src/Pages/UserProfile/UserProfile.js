@@ -49,7 +49,7 @@ const UserProfile = () => {
         setLoading(false);
       }
     })();
-  }, [userName]);
+  }, [userName, reload]);
 
   const nameChangeHandler = (e) => {
     setName(e.target.value);

@@ -46,9 +46,8 @@ const AddPost = ({ setTweetData, tweetData }) => {
       textareaRef.current.value = "";
     }
 
-    const res = await instance.post("users/addTweet", formdata);
-    const data = res.data.data;
-    //setTweetData((prev) => [data, ...prev]);
+    await instance.post("users/addTweet", formdata);
+    // setTweetData((prev) => [res.data.data, ...prev]);
     setPreviewImage(null);
     setTweetImage(null);
   };
